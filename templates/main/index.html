@@ -44,7 +44,7 @@
 
 <main>
 
-    <!-- HERO -->
+    
     <section id="home" class="hero">
 
         <div class="hero__line hero__line_left"></div>
@@ -91,7 +91,7 @@
 
     </section>
 
-    <!-- ABOUT -->
+    
     <section id="about" class="about">
         <div class="about__container">
 
@@ -121,7 +121,7 @@
         </div>
     </section>
 
-    <!-- TEAM -->
+    
     <section id="team" class="team">
         <div class="team__overlay">
 
@@ -156,7 +156,54 @@
 
         </div>
     </section>
+<!-- BOOKING -->
+<section id="booking" class="booking">
+    <div class="booking__container">
 
+        <div class="booking__content">
+            <h2 class="booking__title">Book a Table</h2>
+            <div class="booking__line"></div>
+
+            <form class="booking__form">
+                <input type="text" class="booking__input" placeholder="Name">
+                <input type="email" class="booking__input" placeholder="Email">
+
+                <input type="tel" class="booking__input" placeholder="Phone">
+
+                <select class="booking__input booking__select">
+                    <option selected disabled>People</option>
+                    <option>1 person</option>
+                    <option>2 people</option>
+                    <option>3 people</option>
+                    <option>4 people</option>
+                </select>
+
+                <input type="text" class="booking__input" placeholder="Date (mm/dd)">
+
+                <select class="booking__input booking__select">
+                    <option selected disabled>Time</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                </select>
+
+                <button type="submit" class="booking__button">Book Now</button>
+            </form>
+        </div>
+
+        <div class="booking__image-block">
+            <img src="{% static 'main/img/booking-img.png' %}" alt="Book a table" class="booking__image">
+            <div class="booking__square"></div>
+        </div>
+
+    </div>
+
+    <p class="booking__info">
+        Mon - Fri: <strong>8PM - 10PM</strong>, Sat - Sun: <strong>8PM - 3AM</strong>, Phone:
+        <strong>+40 729 131 637/+40 726 458 782</strong>
+    </p>
+</section>
 </main>
 
 </body>
