@@ -2,148 +2,111 @@
 
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <title>Hungry People</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    
-    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+
+    <link rel="stylesheet" href="/static/main/css/style.css?v=12">
 </head>
+
 <body>
 
-<header class="header">
-    <nav class="header__nav">
+    <header class="header">
+        <nav class="header__nav">
 
-        <div class="header__side header__side_left">
-            <a href="#home" class="header__link">Home</a>
-            <a href="#about" class="header__link">About</a>
-            <a href="#team" class="header__link">Team</a>
-            <a href="#booking" class="header__link">Booking</a>
-        </div>
-
-        <a href="#home" class="header__logo">
-            <img src="{% static 'main/img/wheel.svg' %}" alt="Hungry People logo">
-        </a>
-
-        <div class="header__side header__side_right">
-            <a href="#menu" class="header__link">Menu</a>
-            <a href="#gallery" class="header__link">Galerie</a>
-            <a href="#events" class="header__link">Events</a>
-            <a href="#contact" class="header__link">Contact</a>
-        </div>
-
-    </nav>
-</header>
-
-<main>
-
-    
-    <section id="home" class="hero">
-
-        <div class="hero__line hero__line_left"></div>
-        <div class="hero__line hero__line_center_top"></div>
-        <div class="hero__line hero__line_center_bottom"></div>
-        <div class="hero__line hero__line_right"></div>
-
-        <div class="hero__schedule">
-            Mon - Fri: 8PM - 10PM, Sat - Sun: 8PM - 3AM
-        </div>
-
-        <div class="hero__content">
-            <p class="hero__subtitle">Restaurant</p>
-
-            <h1 class="hero__title">Hungry People</h1>
-
-            <div class="hero__yellow-line"></div>
-
-            <div class="hero__buttons">
-                <a href="#booking" class="hero__button hero__button_yellow">Book Table</a>
-                <a href="#about" class="hero__button hero__button_outline">Explore</a>
-            </div>
-        </div>
-
-        <div class="hero__socials">
-            <a href="#" class="hero__social">
-                <i class="fa-brands fa-facebook-f"></i>
-            </a>
-
-            <a href="#" class="hero__social">
-                <i class="fa-brands fa-twitter"></i>
-            </a>
-
-            <a href="#" class="hero__social">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-        </div>
-
-        <a href="#about" class="hero__down">
-            <span>
-                <i class="fa-solid fa-chevron-down"></i>
-            </span>
-        </a>
-
-    </section>
-
-    
-    <section id="about" class="about">
-        <div class="about__container">
-
-            <div class="about__content">
-                <h2 class="about__title">About Us</h2>
-                <div class="about__line"></div>
-
-                <p class="about__lead">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Duis at velit maximus, molestie est a, tempor magna.
-                </p>
-
-                <p class="about__text">
-                    Integer ullamcorper neque eu purus euismod, ac faucibus mauris posuere.
-                    Morbi non ultrices ligula. Sed dictum, enim sed ullamcorper feugiat,
-                    dui odio vehicula eros, a sollicitudin lorem quam nec sem.
-                    Mauris tincidunt feugiat diam convallis pharetra.
-                    Nulla facilisis semper laoreet.
-                </p>
+            <div class="header__side header__side_left">
+                <a href="#home" class="header__link">Home</a>
+                <a href="#about" class="header__link">About</a>
+                <a href="#team" class="header__link">Team</a>
+                <a href="#booking" class="header__link">Booking</a>
             </div>
 
-            <div class="about__image-block">
-                <img src="{% static 'main/img/about-fire.png' %}" alt="About restaurant" class="about__image">
-                <div class="about__square"></div>
+            <a href="#home" class="header__logo">
+                <img src="{% static 'main/img/wheel.svg' %}" alt="Hungry People logo">
+            </a>
+
+            <div class="header__side header__side_right">
+                <a href="#menu" class="header__link">Menu</a>
+                <a href="#gallery" class="header__link">Galerie</a>
+                <a href="#events" class="header__link">Events</a>
+                <a href="#contact" class="header__link">Contact</a>
             </div>
 
-        </div>
-    </section>
+        </nav>
+    </header>
 
-    
-    <section id="team" class="team">
-        <div class="team__overlay">
+    <main>
 
-            <p class="team__caption">Our Team</p>
 
-            <div class="team__container">
+        <section id="home" class="hero">
 
-                <div class="team__image-block">
-                    <img src="{% static 'main/img/team-chef.png' %}" alt="Master chef" class="team__image">
-                    <div class="team__square"></div>
+            <div class="hero__line hero__line_left"></div>
+            <div class="hero__line hero__line_center_top"></div>
+            <div class="hero__line hero__line_center_bottom"></div>
+            <div class="hero__line hero__line_right"></div>
+
+            <div class="hero__schedule">
+                Mon - Fri: 8PM - 10PM, Sat - Sun: 8PM - 3AM
+            </div>
+
+            <div class="hero__content">
+                <p class="hero__subtitle">Restaurant</p>
+
+                <h1 class="hero__title">Hungry People</h1>
+
+                <div class="hero__yellow-line"></div>
+
+                <div class="hero__buttons">
+                    <a href="#booking" class="hero__button hero__button_yellow">Book Table</a>
+                    <a href="#about" class="hero__button hero__button_outline">Explore</a>
                 </div>
+            </div>
 
-                <div class="team__content">
-                    <h2 class="team__title">Master Chef</h2>
-                    <div class="team__line"></div>
+            <div class="hero__socials">
+                <a href="#" class="hero__social">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
 
-                    <p class="team__lead">
+                <a href="#" class="hero__social">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+
+                <a href="#" class="hero__social">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+
+            <a href="#about" class="hero__down">
+                <span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </span>
+            </a>
+
+        </section>
+
+
+        <section id="about" class="about">
+            <div class="about__container">
+
+                <div class="about__content">
+                    <h2 class="about__title">About Us</h2>
+                    <div class="about__line"></div>
+
+                    <p class="about__lead">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Duis at velit maximus, molestie est a, tempor magna.
                     </p>
 
-                    <p class="team__text">
+                    <p class="about__text">
                         Integer ullamcorper neque eu purus euismod, ac faucibus mauris posuere.
                         Morbi non ultrices ligula. Sed dictum, enim sed ullamcorper feugiat,
                         dui odio vehicula eros, a sollicitudin lorem quam nec sem.
@@ -152,151 +115,351 @@
                     </p>
                 </div>
 
+                <div class="about__image-block">
+                    <img src="{% static 'main/img/about-fire.png' %}" alt="About restaurant" class="about__image">
+                    <div class="about__square"></div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section id="team" class="team">
+            <div class="team__overlay">
+
+                <p class="team__caption">Our Team</p>
+
+                <div class="team__container">
+
+                    <div class="team__image-block">
+                        <img src="{% static 'main/img/team-chef.png' %}" alt="Master chef" class="team__image">
+                        <div class="team__square"></div>
+                    </div>
+
+                    <div class="team__content">
+                        <h2 class="team__title">Master Chef</h2>
+                        <div class="team__line"></div>
+
+                        <p class="team__lead">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Duis at velit maximus, molestie est a, tempor magna.
+                        </p>
+
+                        <p class="team__text">
+                            Integer ullamcorper neque eu purus euismod, ac faucibus mauris posuere.
+                            Morbi non ultrices ligula. Sed dictum, enim sed ullamcorper feugiat,
+                            dui odio vehicula eros, a sollicitudin lorem quam nec sem.
+                            Mauris tincidunt feugiat diam convallis pharetra.
+                            Nulla facilisis semper laoreet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- BOOKING -->
+        <section id="booking" class="booking">
+            <div class="booking__container">
+
+                <div class="booking__content">
+                    <h2 class="booking__title">Book a Table</h2>
+                    <div class="booking__line"></div>
+
+                    <form class="booking__form" novalidate>
+                        {% csrf_token %}
+
+                        <input type="text" name="name" class="booking__input" placeholder="Name" required>
+
+                        <input type="email" name="email" class="booking__input" placeholder="Email" required>
+
+                        <input type="tel" name="phone" class="booking__input" placeholder="Phone" required>
+
+                        <select name="people" class="booking__input booking__select" required>
+                            <option value="" selected disabled>People</option>
+                            <option value="1">1 person</option>
+                            <option value="2">2 people</option>
+                            <option value="3">3 people</option>
+                            <option value="4">4 people</option>
+                        </select>
+
+                        <input type="date" name="date" class="booking__input" required>
+
+                        <select name="time" class="booking__input booking__select" required>
+                            <option value="" selected disabled>Time</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                        </select>
+
+                        <button type="submit" class="booking__button">
+                            Book Now
+                        </button>
+
+                        <p class="form-status booking__status" aria-live="polite"></p>
+                    </form>
+                </div>
+
+                <div class="booking__image-block">
+                    <img src="{% static 'main/img/booking-img.png' %}" alt="Book a table" class="booking__image">
+                    <div class="booking__square"></div>
+                </div>
+
             </div>
 
-        </div>
-    </section>
-<!-- BOOKING -->
-<section id="booking" class="booking">
-    <div class="booking__container">
+            <p class="booking__info">
+                Mon - Fri: <strong>8PM - 10PM</strong>, Sat - Sun: <strong>8PM - 3AM</strong>, Phone:
+                <strong>+40 729 131 637/+40 726 458 782</strong>
+            </p>
+        </section>
 
-        <div class="booking__content">
-            <h2 class="booking__title">Book a Table</h2>
-            <div class="booking__line"></div>
-
-            <form class="booking__form">
-                <input type="text" class="booking__input" placeholder="Name">
-                <input type="email" class="booking__input" placeholder="Email">
-
-                <input type="tel" class="booking__input" placeholder="Phone">
-
-                <select class="booking__input booking__select">
-                    <option selected disabled>People</option>
-                    <option>1 person</option>
-                    <option>2 people</option>
-                    <option>3 people</option>
-                    <option>4 people</option>
-                </select>
-
-                <input type="text" class="booking__input" placeholder="Date (mm/dd)">
-
-                <select class="booking__input booking__select">
-                    <option selected disabled>Time</option>
-                    <option>18:00</option>
-                    <option>19:00</option>
-                    <option>20:00</option>
-                    <option>21:00</option>
-                </select>
-
-                <button type="submit" class="booking__button">Book Now</button>
-            </form>
-        </div>
-
-        <div class="booking__image-block">
-            <img src="{% static 'main/img/booking-img.png' %}" alt="Book a table" class="booking__image">
-            <div class="booking__square"></div>
-        </div>
-
-    </div>
-
-    <p class="booking__info">
-        Mon - Fri: <strong>8PM - 10PM</strong>, Sat - Sun: <strong>8PM - 3AM</strong>, Phone:
-        <strong>+40 729 131 637/+40 726 458 782</strong>
-    </p>
-</section>
-</main>
-<!-- SPECIALITIES -->
-<section id="specialties" class="specialties">
-    <div class="specialties__overlay">
-
-        <p class="specialties__caption">Specialities</p>
-
-        <div class="specialties__slider">
-
-    <div class="specialties__slide">
-        <div class="specialties__container">
-
-            <div class="specialties__image-block">
-                <img src="{% static 'main/img/specialty-pancakes.png' %}" alt="Chocolate pancakes" class="specialties__image">
-                <div class="specialties__square"></div>
+        <section id="specialties" class="specialties">
+            <div class="specialties__overlay">
+                <p class="specialties__caption">Specialities</p>
+                <div class="specialties__slider">
+                    <article class="specialties__slide">
+                        <div class="specialties__container">
+                            <div class="specialties__image-block">
+                                <img src="{% static 'main/img/specialty-pancakes.png' %}" alt="Chocolate pancakes"
+                                    class="specialties__image">
+                                <div class="specialties__square"></div>
+                            </div>
+                            <div class="specialties__content">
+                                <h2 class="specialties__title">Chocolate Pancakes</h2>
+                                <div class="specialties__line"></div>
+                                <p class="specialties__lead">Chocolate pancakes with berry cream, crispy flakes and
+                                    fresh seasonal fruit.</p>
+                                <p class="specialties__text">A bright dessert with rich chocolate notes and a soft,
+                                    delicate texture. Fresh berries add a light sour accent, while crispy decoration
+                                    gives the dish contrast and an elegant restaurant-style finish.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="specialties__slide">
+                        <div class="specialties__container">
+                            <div class="specialties__image-block">
+                                <img src="{% static 'main/img/specialty-chocolate.png' %}" alt="Chocolate cake"
+                                    class="specialties__image">
+                                <div class="specialties__square"></div>
+                            </div>
+                            <div class="specialties__content">
+                                <h2 class="specialties__title">Chocolate Cake</h2>
+                                <div class="specialties__line"></div>
+                                <p class="specialties__lead">Rich chocolate cake with smooth cream, deep cocoa flavour
+                                    and elegant plating.</p>
+                                <p class="specialties__text">A classic dessert made for slow evenings and warm
+                                    conversations. Deep cocoa flavour, soft layers and gentle cream create a balanced
+                                    taste that feels rich, refined and not too sweet.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <article class="specialties__slide">
+                        <div class="specialties__container">
+                            <div class="specialties__image-block">
+                                <img src="{% static 'main/img/specialty-salmon.png' %}" alt="Grilled salmon fillet"
+                                    class="specialties__image">
+                                <div class="specialties__square"></div>
+                            </div>
+                            <div class="specialties__content">
+                                <h2 class="specialties__title">Grilled Salmon Fillet</h2>
+                                <div class="specialties__line"></div>
+                                <p class="specialties__lead">Tender grilled salmon with fresh herbs, light garnish and
+                                    creamy sauce.</p>
+                                <p class="specialties__text">A refined main course with clean flavour and careful
+                                    presentation. The salmon is cooked until tender, served with herbs, vegetables and a
+                                    light sauce that keeps the dish fresh, elegant and balanced.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
+        </section>
 
-            <div class="specialties__content">
-                <h2 class="specialties__title">Chocolate Pancakes</h2>
-                <div class="specialties__line"></div>
-
-                <p class="specialties__lead">
-                    Chocolate pancakes with berry cream, crispy flakes and fresh seasonal fruit.
-                </p>
-
-                <p class="specialties__text">
-                    A bright dessert with rich chocolate notes and a soft, delicate texture.
-                    Fresh berries add a light sour accent, while crispy decoration gives the dish
-                    contrast and an elegant restaurant-style finish.
-                </p>
+        <section id="menu" class="menu">
+            <div class="menu__container">
+                <header class="section-heading">
+                    <h2 class="section-heading__title">Delicious Menu</h2>
+                    <div class="section-heading__line"></div>
+                    <p class="section-heading__lead">Discover seasonal dishes prepared with fresh ingredients and
+                        careful attention to every detail.</p>
+                </header>
+                <nav class="menu__filters" aria-label="Menu categories">
+                    <button class="menu__filter is-active" type="button" data-filter="all">All</button>
+                    <button class="menu__filter" type="button" data-filter="soup">Soups</button>
+                    <button class="menu__filter" type="button" data-filter="pizza">Pizza</button>
+                    <button class="menu__filter" type="button" data-filter="pasta">Pasta</button>
+                    <button class="menu__filter" type="button" data-filter="dessert">Desserts</button>
+                    <button class="menu__filter" type="button" data-filter="drink">Drinks</button>
+                </nav>
+                <div class="menu__grid">
+                    <article class="menu__item" data-category="pizza">
+                        <div class="menu__item-top">
+                            <h3>Pizza Quattro Stagioni</h3><span>55.68 USD</span>
+                        </div>
+                        <p>Tomato, mozzarella, mushrooms, olives and artichokes.</p>
+                    </article>
+                    <article class="menu__item" data-category="pasta">
+                        <div class="menu__item-top">
+                            <h3>Truffle Tagliatelle</h3><span>42.90 USD</span>
+                        </div>
+                        <p>Fresh pasta, truffle cream, parmesan and herbs.</p>
+                    </article>
+                    <article class="menu__item" data-category="soup">
+                        <div class="menu__item-top">
+                            <h3>Roasted Tomato Soup</h3><span>24.50 USD</span>
+                        </div>
+                        <p>Slow-roasted tomatoes, basil oil and sourdough toast.</p>
+                    </article>
+                    <article class="menu__item" data-category="dessert">
+                        <div class="menu__item-top">
+                            <h3>Chocolate Pancakes</h3><span>29.80 USD</span>
+                        </div>
+                        <p>Berry cream, crisp flakes and seasonal fruit.</p>
+                    </article>
+                    <article class="menu__item" data-category="pizza">
+                        <div class="menu__item-top">
+                            <h3>Prosciutto Pizza</h3><span>51.40 USD</span>
+                        </div>
+                        <p>Prosciutto, burrata, rocket and cherry tomatoes.</p>
+                    </article>
+                    <article class="menu__item" data-category="drink">
+                        <div class="menu__item-top">
+                            <h3>Citrus Garden</h3><span>16.20 USD</span>
+                        </div>
+                        <p>Orange, grapefruit, rosemary and sparkling water.</p>
+                    </article>
+                    <article class="menu__item" data-category="pasta">
+                        <div class="menu__item-top">
+                            <h3>Seafood Linguine</h3><span>49.70 USD</span>
+                        </div>
+                        <p>Prawns, mussels, garlic, tomato and white wine.</p>
+                    </article>
+                    <article class="menu__item" data-category="soup">
+                        <div class="menu__item-top">
+                            <h3>Wild Mushroom Soup</h3><span>27.30 USD</span>
+                        </div>
+                        <p>Forest mushrooms, thyme cream and toasted seeds.</p>
+                    </article>
+                    <article class="menu__item" data-category="dessert">
+                        <div class="menu__item-top">
+                            <h3>Vanilla Berry Soufflé</h3><span>31.60 USD</span>
+                        </div>
+                        <p>Vanilla cream, berries and caramelised almonds.</p>
+                    </article>
+                    <article class="menu__item" data-category="pizza">
+                        <div class="menu__item-top">
+                            <h3>Four Cheese Pizza</h3><span>48.90 USD</span>
+                        </div>
+                        <p>Mozzarella, gorgonzola, parmesan and taleggio.</p>
+                    </article>
+                    <article class="menu__item" data-category="drink">
+                        <div class="menu__item-top">
+                            <h3>Berry Lemonade</h3><span>14.80 USD</span>
+                        </div>
+                        <p>Fresh berries, lemon, mint and sparkling water.</p>
+                    </article>
+                    <article class="menu__item" data-category="pasta">
+                        <div class="menu__item-top">
+                            <h3>Classic Carbonara</h3><span>39.90 USD</span>
+                        </div>
+                        <p>Guanciale, egg yolk, pecorino and black pepper.</p>
+                    </article>
+                    <article class="menu__item" data-category="soup">
+                        <div class="menu__item-top">
+                            <h3>Seafood Bisque</h3><span>32.40 USD</span>
+                        </div>
+                        <p>Shellfish stock, cream, herbs and garlic croutons.</p>
+                    </article>
+                    <article class="menu__item" data-category="dessert">
+                        <div class="menu__item-top">
+                            <h3>Dark Chocolate Cake</h3><span>30.20 USD</span>
+                        </div>
+                        <p>Cocoa sponge, ganache and salted caramel.</p>
+                    </article>
+                    <article class="menu__item" data-category="drink">
+                        <div class="menu__item-top">
+                            <h3>Cold Brew Tonic</h3><span>13.50 USD</span>
+                        </div>
+                        <p>Cold brew coffee, tonic water and orange zest.</p>
+                    </article>
+                </div>
             </div>
+        </section>
 
-        </div>
-    </div>
-
-    <div class="specialties__slide">
-        <div class="specialties__container">
-
-            <div class="specialties__image-block">
-                <img src="{% static 'main/img/specialty-chocolate.png' %}" alt="Chocolate cake" class="specialties__image">
-                <div class="specialties__square"></div>
+        <section id="events" class="events">
+            <div class="events__overlay">
+                <p class="events__caption">Private Events</p>
+                <div class="events__container">
+                    <article class="events__card events__card_left">
+                        <img src="{% static 'main/img/event-wedding.png' %}"alt="Wedding event" class="events__image">
+                        <div class="events__label events__label_right">Weddings</div>
+                        <div class="events__square events__square_left"></div>
+                    </article>
+                    <article class="events__card events__card_right">
+                        <img src="{% static 'main/img/event-corporate.png' %}" alt="Corporate event" class="events__image">
+                        <div class="events__label events__label_left">Corporate Parties</div>
+                        <div class="events__square events__square_right"></div>
+                    </article>
+                </div>
+                <p class="events__info">For private events please call <strong>+40 729 131 637 / +40 726 458
+                        782</strong> or use the contact form below.</p>
             </div>
+        </section>
 
-            <div class="specialties__content">
-                <h2 class="specialties__title">Chocolate Cake</h2>
-                <div class="specialties__line"></div>
-
-                <p class="specialties__lead">
-                    Rich chocolate cake with smooth cream, deep cocoa flavor and elegant plating.
-                </p>
-
-                <p class="specialties__text">
-                    A classic dessert made for slow evenings and warm conversations.
-                    Deep cocoa flavor, soft layers and gentle cream create a balanced taste
-                    that feels rich, refined and not too sweet.
-                </p>
+        <section id="gallery" class="gallery" aria-label="Restaurant gallery">
+            <img src="{% static 'main/img/gallery-1.jpg' %}" alt="Restaurant photo" class="gallery__image">
+            <img src="{% static 'main/img/gallery-2.jpg' %}" alt="Restaurant photo" class="gallery__image">
+            <img src="{% static 'main/img/gallery-3.jpg' %}" alt="Restaurant photo" class="gallery__image">
+            <img src="{% static 'main/img/gallery-4.jpg' %}" alt="Restaurant photo" class="gallery__image">
+        </section>
+        <section id="contact" class="contact">
+            <div class="contact__container">
+                <header class="section-heading">
+                    <h2 class="section-heading__title">Contact</h2>
+                    <div class="section-heading__line"></div>
+                    <p class="section-heading__lead">Send us a message and our team will contact you as soon as
+                        possible.</p>
+                </header>
+                <form class="contact__form" novalidate>
+                    {% csrf_token %}
+                    <div class="contact__row">
+                        <input class="contact__input" type="text" name="name" placeholder="Name" required>
+                        <input class="contact__input" type="email" name="email" placeholder="Email" required>
+                        <input class="contact__input" type="tel" name="phone" placeholder="Phone">
+                    </div>
+                    <textarea class="contact__message" name="message" placeholder="Message" required></textarea>
+                    <div class="contact__bottom">
+                        <div class="contact__details">
+                            <span><i class="fa-solid fa-location-dot"></i> 5th London Boulevard, U.K.</span>
+                            <a href="tel:+40729131637"><i class="fa-solid fa-phone"></i> +40 729 131 637</a>
+                            <a href="mailto:office@hungrypeople.com"><i class="fa-solid fa-envelope"></i>
+                                office@hungrypeople.com</a>
+                        </div>
+                        <button class="contact__button" type="submit">Send Message</button>
+                    </div>
+                    <p class="form-status contact__status" aria-live="polite"></p>
+                </form>
             </div>
+        </section>
 
-        </div>
-    </div>
+        <section class="map" aria-label="Restaurant location">
+            <iframe
+                class="map__frame"
+                title="Hungry People location on Yandex Maps"
+                src="https://yandex.ru/map-widget/v1/?ll=-0.127758%2C51.507351&z=14&l=map&pt=-0.127758%2C51.507351%2Cpm2rdm"
+                loading="lazy"
+                allowfullscreen
+            ></iframe>
+        </section>
 
-    <div class="specialties__slide">
-        <div class="specialties__container">
-
-            <div class="specialties__image-block">
-                <img src="{% static 'main/img/specialty-salmon.png' %}" alt="Grilled salmon fillet" class="specialties__image">
-                <div class="specialties__square"></div>
-            </div>
-
-            <div class="specialties__content">
-                <h2 class="specialties__title">Grilled Salmon Fillet</h2>
-                <div class="specialties__line"></div>
-
-                <p class="specialties__lead">
-                    Tender grilled salmon with fresh herbs, light garnish and creamy sauce.
-                </p>
-
-                <p class="specialties__text">
-                    A refined main course with clean flavor and careful presentation.
-                    The salmon is cooked until tender, served with herbs, vegetables and a light sauce
-                    that keeps the dish fresh, elegant and balanced.
-                </p>
-            </div>
-
-        </div>
-    </div>
-
-</div>
-
-    </div>
-</section>
+    </main>
+    <footer class="footer">
+        <p>© Copyright Hungry People 2026</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{% static 'main/js/main.js' %}"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script src="{% static 'main/js/main.js' %}"></script>
+
 </html>
