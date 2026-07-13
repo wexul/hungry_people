@@ -1476,25 +1476,29 @@ textarea {
 }
 
 .events__label {
-  position: absolute;
-  top: 0;
-  z-index: 4;
+    position: absolute;
+    top: 0;
+    z-index: 4;
 
-  width: 80px;
-  height: 475px;
+    box-sizing: border-box;
+    width: 80px;
+    height: 475px;
+    padding-top: 20px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 
-  background: var(--black);
+    background: var(--black);
 
-  font-family: "Tenor Sans", serif;
-  font-size: 24px;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
+    font-family: "Tenor Sans", serif;
+    font-size: 24px;
+    font-weight: 400;
+    text-transform: uppercase;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
 
-  color: var(--white);
+    color: var(--white);
 }
 
 .events__label_right {
@@ -1753,6 +1757,10 @@ textarea {
   margin: 0;
 
   font-size: 12px;
+}
+
+.footer strong {
+    font-weight: 700;
 }
 
 /* =========================
