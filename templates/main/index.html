@@ -1,7 +1,8 @@
 {% load static %}
+{% static 'main/img/' as img_base %}
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -9,19 +10,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
-    <link rel="stylesheet" href="/static/main/css/style.css?v=12">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}?v=15">
 </head>
 
 <body>
 
     <header class="header">
         <nav class="header__nav">
+
+            <button
+                class="header__toggle"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
             <div class="header__side header__side_left">
                 <a href="#home" class="header__link">Home</a>
@@ -39,10 +51,154 @@
                 <a href="#gallery" class="header__link">Galerie</a>
                 <a href="#events" class="header__link">Events</a>
                 <a href="#contact" class="header__link">Contact</a>
+                <button
+                    type="button"
+                    class="header__link header__auth-button"
+                    data-auth-button
+                    data-logout-url="{% url 'main:logout' %}"
+                    {% if request.user.is_authenticated %}data-auth-logout{% else %}data-auth-open{% endif %}
+                >
+                    {% if request.user.is_authenticated %}Logout{% else %}Login{% endif %}
+                </button>
             </div>
 
         </nav>
     </header>
+
+    <div class="auth-modal" aria-hidden="true">
+        <div class="auth-modal__backdrop" data-auth-close></div>
+
+        <section
+            class="auth-modal__dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="auth-modal-title"
+        >
+            <button
+                class="auth-modal__close"
+                type="button"
+                aria-label="Close authorization window"
+                data-auth-close
+            >
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+
+            <h2 id="auth-modal-title" class="auth-modal__title">Login</h2>
+            <div class="auth-modal__line"></div>
+
+            <div class="auth-modal__tabs" role="tablist">
+                <button
+                    class="auth-modal__tab is-active"
+                    type="button"
+                    role="tab"
+                    aria-selected="true"
+                    data-auth-tab="login"
+                    data-auth-title="Login"
+                >
+                    Sign In
+                </button>
+
+                <button
+                    class="auth-modal__tab"
+                    type="button"
+                    role="tab"
+                    aria-selected="false"
+                    data-auth-tab="register"
+                    data-auth-title="Registration"
+                >
+                    Register
+                </button>
+            </div>
+
+            <form class="auth-modal__form" data-auth-panel="login" action="{% url 'main:login' %}" method="post" novalidate>
+                {% csrf_token %}
+
+                <label class="auth-modal__field">
+                    <span>Email</span>
+                    <input type="email" name="email" placeholder="Email" autocomplete="email" required>
+                </label>
+
+                <label class="auth-modal__field">
+                    <span>Password</span>
+                    <input type="password" name="password" placeholder="Password" autocomplete="current-password" required>
+                </label>
+
+                <div class="auth-modal__options">
+                    <label class="auth-modal__remember">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+
+                    <button class="auth-modal__forgot" type="button" data-reset-url="{% url 'main:password_reset_request' %}">Forgot password?</button>
+                </div>
+
+                <button class="auth-modal__submit" type="submit">Sign In</button>
+            </form>
+
+            <form class="auth-modal__form auth-modal__form_register" data-auth-panel="register" action="{% url 'main:register' %}" method="post" novalidate hidden>
+                {% csrf_token %}
+
+                <label class="auth-modal__field">
+                    <span>Full name</span>
+                    <input
+                        type="text"
+                        name="full_name"
+                        placeholder="Full name"
+                        autocomplete="name"
+                        required
+                    >
+                </label>
+
+                <label class="auth-modal__field">
+                    <span>Email address</span>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required
+                    >
+                </label>
+
+                <label class="auth-modal__field">
+                    <span>Password</span>
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </label>
+
+                <label class="auth-modal__field">
+                    <span>Confirm password</span>
+                    <input
+                        type="password"
+                        name="password_confirm"
+                        placeholder="Confirm password"
+                        autocomplete="new-password"
+                        required
+                    >
+                </label>
+
+                <label class="auth-modal__field">
+                    <span>Mobile number</span>
+                    <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Mobile number"
+                        autocomplete="tel"
+                        required
+                    >
+                </label>
+
+                <button class="auth-modal__submit" type="submit">Sign Up</button>
+            </form>
+
+            <p class="auth-modal__status" aria-live="polite"></p>
+        </section>
+    </div>
 
     <main>
 
@@ -72,16 +228,34 @@
             </div>
 
             <div class="hero__socials">
-                <a href="#" class="hero__social">
-                    <i class="fa-brands fa-facebook-f"></i>
+                <a
+                    href="https://www.facebook.com/"
+                    class="hero__social"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                >
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
                 </a>
 
-                <a href="#" class="hero__social">
-                    <i class="fa-brands fa-twitter"></i>
+                <a
+                    href="https://x.com/"
+                    class="hero__social"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="X"
+                >
+                    <i class="fa-brands fa-twitter" aria-hidden="true"></i>
                 </a>
 
-                <a href="#" class="hero__social">
-                    <i class="fa-brands fa-instagram"></i>
+                <a
+                    href="https://www.instagram.com/"
+                    class="hero__social"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                >
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
                 </a>
             </div>
 
@@ -96,66 +270,35 @@
 
         <section id="about" class="about">
             <div class="about__container">
-
                 <div class="about__content">
-                    <h2 class="about__title">About Us</h2>
+                    <h2 class="about__title">{{ about.title }}</h2>
                     <div class="about__line"></div>
-
-                    <p class="about__lead">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Duis at velit maximus, molestie est a, tempor magna.
-                    </p>
-
-                    <p class="about__text">
-                        Integer ullamcorper neque eu purus euismod, ac faucibus mauris posuere.
-                        Morbi non ultrices ligula. Sed dictum, enim sed ullamcorper feugiat,
-                        dui odio vehicula eros, a sollicitudin lorem quam nec sem.
-                        Mauris tincidunt feugiat diam convallis pharetra.
-                        Nulla facilisis semper laoreet.
-                    </p>
+                    <p class="about__lead">{{ about.subtitle }}</p>
+                    <p class="about__text">{{ about.text }}</p>
                 </div>
-
                 <div class="about__image-block">
-                    <img src="{% static 'main/img/about-fire.png' %}" alt="About restaurant" class="about__image">
+                    <img src="{{ img_base }}{{ about.image }}" alt="{{ about.title }}" class="about__image">
                     <div class="about__square"></div>
                 </div>
-
             </div>
         </section>
 
 
         <section id="team" class="team">
             <div class="team__overlay">
-
                 <p class="team__caption">Our Team</p>
-
                 <div class="team__container">
-
                     <div class="team__image-block">
-                        <img src="{% static 'main/img/team-chef.png' %}" alt="Master chef" class="team__image">
+                        <img src="{{ img_base }}{{ team.image }}" alt="{{ team.title }}" class="team__image">
                         <div class="team__square"></div>
                     </div>
-
                     <div class="team__content">
-                        <h2 class="team__title">Master Chef</h2>
+                        <h2 class="team__title">{{ team.title }}</h2>
                         <div class="team__line"></div>
-
-                        <p class="team__lead">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            Duis at velit maximus, molestie est a, tempor magna.
-                        </p>
-
-                        <p class="team__text">
-                            Integer ullamcorper neque eu purus euismod, ac faucibus mauris posuere.
-                            Morbi non ultrices ligula. Sed dictum, enim sed ullamcorper feugiat,
-                            dui odio vehicula eros, a sollicitudin lorem quam nec sem.
-                            Mauris tincidunt feugiat diam convallis pharetra.
-                            Nulla facilisis semper laoreet.
-                        </p>
+                        <p class="team__lead">{{ team.subtitle }}</p>
+                        <p class="team__text">{{ team.text }}</p>
                     </div>
-
                 </div>
-
             </div>
         </section>
         <!-- BOOKING -->
@@ -166,14 +309,14 @@
                     <h2 class="booking__title">Book a Table</h2>
                     <div class="booking__line"></div>
 
-                    <form class="booking__form" novalidate>
+                    <form class="booking__form" action="{% url 'main:booking_create' %}" method="post" novalidate>
                         {% csrf_token %}
 
-                        <input type="text" name="name" class="booking__input" placeholder="Name" required>
+                        <input type="text" name="name" class="booking__input" placeholder="Name" value="{% if request.user.is_authenticated %}{{ request.user.get_full_name }}{% endif %}" required>
 
-                        <input type="email" name="email" class="booking__input" placeholder="Email" required>
+                        <input type="email" name="email" class="booking__input" placeholder="Email" value="{% if request.user.is_authenticated %}{{ request.user.email }}{% endif %}" required>
 
-                        <input type="tel" name="phone" class="booking__input" placeholder="Phone" required>
+                        <input type="tel" name="phone" class="booking__input" placeholder="Phone" value="{% if request.user.is_authenticated %}{{ request.user.profile.phone }}{% endif %}" required>
 
                         <select name="people" class="booking__input booking__select" required>
                             <option value="" selected disabled>People</option>
@@ -183,7 +326,7 @@
                             <option value="4">4 people</option>
                         </select>
 
-                        <input type="date" name="date" class="booking__input" required>
+                        <input type="date" name="date" class="booking__input" min="{{ today|date:'Y-m-d' }}" required>
 
                         <select name="time" class="booking__input booking__select" required>
                             <option value="" selected disabled>Time</option>
@@ -218,407 +361,83 @@
             <div class="specialties__overlay">
                 <p class="specialties__caption">Specialities</p>
                 <div class="specialties__slider">
-                    <article class="specialties__slide">
-                        <div class="specialties__container">
-                            <div class="specialties__image-block">
-                                <img src="{% static 'main/img/specialty-pancakes.png' %}" alt="Chocolate pancakes"
-                                    class="specialties__image">
-                                <div class="specialties__square"></div>
+                    {% for speciality in specialities %}
+                        <article class="specialties__slide">
+                            <div class="specialties__container">
+                                <div class="specialties__image-block">
+                                    <img src="{{ img_base }}{{ speciality.image }}" alt="{{ speciality.title }}" class="specialties__image">
+                                    <div class="specialties__square"></div>
+                                </div>
+                                <div class="specialties__content">
+                                    <h2 class="specialties__title">{{ speciality.title }}</h2>
+                                    <div class="specialties__line"></div>
+                                    <p class="specialties__lead">{{ speciality.subtitle }}</p>
+                                    <p class="specialties__text">{{ speciality.text }}</p>
+                                </div>
                             </div>
-                            <div class="specialties__content">
-                                <h2 class="specialties__title">Chocolate Pancakes</h2>
-                                <div class="specialties__line"></div>
-                                <p class="specialties__lead">Chocolate pancakes with berry cream, crispy flakes and
-                                    fresh seasonal fruit.</p>
-                                <p class="specialties__text">A bright dessert with rich chocolate notes and a soft,
-                                    delicate texture. Fresh berries add a light sour accent, while crispy decoration
-                                    gives the dish contrast and an elegant restaurant-style finish.</p>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="specialties__slide">
-                        <div class="specialties__container">
-                            <div class="specialties__image-block">
-                                <img src="{% static 'main/img/specialty-chocolate.png' %}" alt="Chocolate cake"
-                                    class="specialties__image">
-                                <div class="specialties__square"></div>
-                            </div>
-                            <div class="specialties__content">
-                                <h2 class="specialties__title">Chocolate Cake</h2>
-                                <div class="specialties__line"></div>
-                                <p class="specialties__lead">Rich chocolate cake with smooth cream, deep cocoa flavour
-                                    and elegant plating.</p>
-                                <p class="specialties__text">A classic dessert made for slow evenings and warm
-                                    conversations. Deep cocoa flavour, soft layers and gentle cream create a balanced
-                                    taste that feels rich, refined and not too sweet.</p>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="specialties__slide">
-                        <div class="specialties__container">
-                            <div class="specialties__image-block">
-                                <img src="{% static 'main/img/specialty-salmon.png' %}" alt="Grilled salmon fillet"
-                                    class="specialties__image">
-                                <div class="specialties__square"></div>
-                            </div>
-                            <div class="specialties__content">
-                                <h2 class="specialties__title">Grilled Salmon Fillet</h2>
-                                <div class="specialties__line"></div>
-                                <p class="specialties__lead">Tender grilled salmon with fresh herbs, light garnish and
-                                    creamy sauce.</p>
-                                <p class="specialties__text">A refined main course with clean flavour and careful
-                                    presentation. The salmon is cooked until tender, served with herbs, vegetables and a
-                                    light sauce that keeps the dish fresh, elegant and balanced.</p>
-                            </div>
-                        </div>
-                    </article>
+                        </article>
+                    {% endfor %}
                 </div>
             </div>
         </section>
 
         <section id="menu" class="menu">
             <div class="menu__container">
-
                 <header class="section-heading">
-                    <h2 class="section-heading__title">
-                        Delicious Menu
-                    </h2>
-
+                    <h2 class="section-heading__title">Delicious Menu</h2>
                     <div class="section-heading__line"></div>
-
                     <p class="section-heading__lead">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Duis at velit maximus, molestie est a, tempor magna.
                     </p>
                 </header>
 
-
                 <nav class="menu__filters" aria-label="Menu categories">
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="soup"
-                    >
-                        Soupe
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="pizza"
-                    >
-                        Pizza
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="pasta"
-                    >
-                        Pasta
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="dessert"
-                    >
-                        Desert
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="wine"
-                    >
-                        Wine
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="beer"
-                    >
-                        Beer
-                    </button>
-
-                    <button
-                        class="menu__filter"
-                        type="button"
-                        data-filter="drink"
-                    >
-                        Drinks
-                    </button>
-
+                    {% for category in menu_categories %}
+                        <button
+                            class="menu__filter"
+                            type="button"
+                            data-filter="{{ category.slug }}"
+                            aria-pressed="false"
+                        >
+                            {{ category.name }}
+                        </button>
+                    {% endfor %}
                 </nav>
 
-
                 <div class="menu__grid">
-
-                    <!-- SOUPE -->
-
-                    <article class="menu__item" data-category="soup">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="soup">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="soup">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- PIZZA -->
-
-                    <article class="menu__item" data-category="pizza">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="pizza">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="pizza">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- PASTA -->
-
-                    <article class="menu__item" data-category="pasta">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="pasta">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="pasta">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- DESERT -->
-
-                    <article class="menu__item" data-category="dessert">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="dessert">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="dessert">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- WINE -->
-
-                    <article class="menu__item" data-category="wine">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="wine">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="wine">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- BEER -->
-
-                    <article class="menu__item" data-category="beer">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="beer">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="beer">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-
-                    <!-- DRINKS -->
-
-                    <article class="menu__item" data-category="drink">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="drink">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
-                    <article class="menu__item" data-category="drink">
-                        <div class="menu__item-top">
-                            <h3>Pizza Quatro Stagioni</h3>
-                            <span>55,68 USD</span>
-                        </div>
-
-                        <p>Integer ullamcorper neque eu purus euismod</p>
-                    </article>
-
+                    {% for item in menu_items %}
+                        <article class="menu__item" data-category="{{ item.category.slug }}">
+                            <div class="menu__item-top">
+                                <h3>{{ item.title }}</h3>
+                                <span>{{ item.price_display }} USD</span>
+                            </div>
+                            <p>{{ item.subtitle }}</p>
+                        </article>
+                    {% endfor %}
                 </div>
             </div>
         </section>
 
         <section id="events" class="events">
             <div class="events__overlay">
-
-                <p class="events__caption">
-                    Private Events
-                </p>
-
+                <p class="events__caption">Private Events</p>
                 <div class="events__container">
-
-                    <article class="events__card events__card_left">
-
-                        <img
-                            src="{% static 'main/img/event-wedding.png' %}"
-                            alt="Wedding event"
-                            class="events__image"
-                        >
-
-                        <div class="events__label events__label_right">
-                            Weddings
-                        </div>
-
-                        <div class="events__square events__square_left"></div>
-
-                    </article>
-
-
-                    <article class="events__card events__card_right">
-
-                        <img
-                            src="{% static 'main/img/event-corporate.png' %}"
-                            alt="Corporate event"
-                            class="events__image"
-                        >
-
-                        <div class="events__label events__label_left">
-                            Corporate Parties
-                        </div>
-
-                        <div class="events__square events__square_right"></div>
-
-                    </article>
-
+                    {% for event in events %}
+                        <article class="events__card events__card_{{ event.position }}">
+                            <img src="{{ img_base }}{{ event.image }}" alt="{{ event.title }}" class="events__image">
+                            <div class="events__label {% if event.position == 'left' %}events__label_right{% else %}events__label_left{% endif %}">
+                                {{ event.title }}
+                            </div>
+                            <div class="events__square events__square_{{ event.position }}"></div>
+                        </article>
+                    {% endfor %}
                 </div>
-
                 <p class="events__info">
                     For private events please call:
                     <strong>+40 729 131 637/+40 726 458 782</strong>
                     or use the contact form.
                 </p>
-
             </div>
         </section>
 
@@ -648,7 +467,7 @@
                 </header>
 
 
-                <form class="contact__form" novalidate>
+                <form class="contact__form" action="{% url 'main:contact_create' %}" method="post" novalidate>
                     {% csrf_token %}
 
                     <div class="contact__row">
@@ -658,6 +477,7 @@
                             type="text"
                             name="name"
                             placeholder="Name"
+                            value="{% if request.user.is_authenticated %}{{ request.user.get_full_name }}{% endif %}"
                             required
                         >
 
@@ -666,6 +486,7 @@
                             type="email"
                             name="email"
                             placeholder="Email"
+                            value="{% if request.user.is_authenticated %}{{ request.user.email }}{% endif %}"
                             required
                         >
 
@@ -674,6 +495,7 @@
                             type="tel"
                             name="phone"
                             placeholder="Phone"
+                            value="{% if request.user.is_authenticated %}{{ request.user.profile.phone }}{% endif %}"
                         >
 
                     </div>
@@ -698,7 +520,12 @@
 
                             <a href="tel:+40729131637">
                                 <i class="fa-solid fa-phone"></i>
-                                +40 729 131 637/+40 726 458 782
+                                +40 729 131 637
+                            </a>
+
+                            <a href="tel:+40726458782">
+                                <i class="fa-solid fa-phone"></i>
+                                +40 726 458 782
                             </a>
 
                             <a href="mailto:office@mindblister.com">
@@ -745,9 +572,14 @@
             © Copyright <strong>Mindblister</strong> 2019
         </p>
     </footer>
+
+    <button class="back-to-top" type="button" aria-label="Back to top">
+        <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    <script src="{% static 'main/js/main.js' %}"></script>
+    <script src="{% static 'main/js/main.js' %}?v=15"></script>
 </body>
 
 </html>

@@ -1,0 +1,9 @@
+New table booking
+
+Name: {{ booking.name }}
+Email: {{ booking.email }}
+Phone: {{ booking.phone }}
+People: {{ booking.people }}
+Date: {{ booking.date|date:"Y-m-d" }}
+Time: {{ booking.time|time:"H:i" }}
+Created: {{ booking.created_at|date:"Y-m-d H:i" }}

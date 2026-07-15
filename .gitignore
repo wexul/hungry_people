@@ -6,3 +6,12 @@ db.sqlite3
 .idea/
 .vscode/
 .DS_Store
+.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+e2e_result.txt
+*.log
+*.zip
+.venv/
+*.py[cod]
